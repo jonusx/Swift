@@ -31,8 +31,8 @@ func histogramWithString(string:String) -> NSCountedSet {
     return histogram
 }
 
-func indexesOfPermuentationsOfString(smallString:String, inside bigString:String) -> Int[] {
-    var results:Array = Int[]();
+func indexesOfPermuentationsOfString(smallString:String, inside bigString:String) -> [Int] {
+    var results:Array = [Int]();
     
     let smallStringLength = countElements(smallString)
     let bigStringLength = countElements(bigString)
@@ -74,5 +74,5 @@ func indexesOfPermuentationsOfString(smallString:String, inside bigString:String
     return results;
 }
 
-let indexes:Int[] = indexesOfPermuentationsOfString("ball", inside:"baballllllllhellotherethewaterisblueballoonsarefun.Theballisred.ballballbaballll");
+let indexes:[Int] = indexesOfPermuentationsOfString("ball", inside:"baballllllllhellotherethewaterisblueballoonsarefun.Theballisred.ballballbaballll");
 

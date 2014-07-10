@@ -2,7 +2,7 @@
 
 import Cocoa
 
-let palindromeStrings:String[] = ["I, madam. I made radio! So I dared! Am I mad? Am I?", "A man, a plan, a canal -- Panama!"]
+let palindromeStrings:[String] = ["I, madam. I made radio! So I dared! Am I mad? Am I?", "A man, a plan, a canal -- Panama!"]
 
 extension String {
     func characterAtIndex(index:Int) -> Character {
@@ -29,12 +29,12 @@ func isPalindrome(string:String) -> Bool {
 
 let test = isPalindrome("poaop")
 
-func allPalindromes(string:String) -> String[]? {
+func allPalindromes(string:String) -> [String]? {
     
     let cleanedString:String = cleanString(string)!
     
     var stringPlaceholder:String = ""
-    var resultArray:String[] = String[]()
+    var resultArray:[String] = [String]()
     for var index = 0, stringCount = countElements(cleanedString); index < stringCount; index++ {
         stringPlaceholder = ""
         stringPlaceholder += cleanedString.characterAtIndex(index)

@@ -8,7 +8,7 @@ class MRCNode: NSObject {
     var rightNode:MRCNode?
 }
 
-func createTree(#numbers:Int[], #low:Int, #high:Int) -> MRCNode! {
+func createTree(#numbers:[Int], #low:Int, #high:Int) -> MRCNode! {
     if low > high {
         return nil
     }
@@ -57,7 +57,7 @@ func breadthtransverseNode(node:MRCNode!) {
         return
     }
     
-    var queue:MRCNode[] = [node]
+    var queue:[MRCNode] = [node]
     var transversingNode:MRCNode?
     
     while !queue.isEmpty {
@@ -78,9 +78,9 @@ func breadthtransverseNode(node:MRCNode!) {
     queue.removeAll(keepCapacity: false);
 }
 
-var array:Int[] = Int[]()
+var array:[Int] = []
 
-for index:Int in 0..10 {
+for index:Int in 0..<10 {
     array += index
 }
 

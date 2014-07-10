@@ -2,15 +2,15 @@
 
 import Cocoa
 
-var queens:Int[] = Int[](count:8, repeatedValue:-1)
+var queens:[Int] = [Int](count:8, repeatedValue:-1)
 
-var solutionList:String[] = String[]()
+var solutionList:[String] = [String]()
 
-func logQueens(queens:Int[]) -> String {
+func logQueens(queens:[Int]) -> String {
     var result:String = "\n"
     let count:Int = countElements(queens)
-    for index in 0..count {
-        for index1 in 0..count {
+    for index in 0..<count {
+        for index1 in 0..<count {
             if queens[index] == index1 {
                 result += "Q"
             }
@@ -26,7 +26,7 @@ func logQueens(queens:Int[]) -> String {
 }
 
 func canPlaceQueen(#row:Int, #column:Int) -> Bool {
-    for prevColumn in 0..column {
+    for prevColumn in 0..<column {
         if (queens[prevColumn] == -1) {
             return true
         }
@@ -42,7 +42,7 @@ func placeQueen(column:Int) {
         solutionList += logQueens(queens)
         return
     }
-    for row in 0..8 {
+    for row in 0..<8 {
         if canPlaceQueen(row: row, column: column) {
             queens[column] = row
             placeQueen(column + 1)
