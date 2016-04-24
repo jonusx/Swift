@@ -2,17 +2,17 @@
 
 import Cocoa
 
-func isAnagram(#string1:String, #string2:String) -> Bool {
-    if countElements(string1) != countElements(string2) { return false }
+func isAnagram(string1 string1:String, string2:String) -> Bool {
+    if string1.characters.count != string2.characters.count { return false }
     
     var counts:Dictionary = Dictionary<String, Int>()
     var uniqueCharacters:Int = 0
     var completedCharacters:Int = 0
     
-    for letter in string1 {
-        if !counts[String(letter)] || counts[String(letter)] == 0 {
+    for letter in string1.characters {
+        if counts[String(letter)] == nil || counts[String(letter)] == 0 {
             counts[String(letter)] = 1
-            uniqueCharacters++
+            uniqueCharacters += 1
         }
         else
         {
@@ -21,20 +21,20 @@ func isAnagram(#string1:String, #string2:String) -> Bool {
     }
     
     var index:Int = 0
-    for letter in string2 {
-        if !counts[String(letter)] || counts[String(letter)] == 0 {
+    for letter in string2.characters {
+        if counts[String(letter)] == nil || counts[String(letter)] == 0 {
             return false
         }
         
         counts[String(letter)] = counts[String(letter)]! - 1
         
         if counts[String(letter)] == 0 {
-            completedCharacters++
-            if completedCharacters == uniqueCharacters  && index == countElements(string2) - 1 {
+            completedCharacters += 1
+            if completedCharacters == uniqueCharacters  && index == string2.characters.count - 1 {
                 return true
             }
         }
-        index++
+        index += 1
     }
     
     return false

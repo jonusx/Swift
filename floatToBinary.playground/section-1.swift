@@ -9,15 +9,15 @@ func binaryStringToFloat(string:String) -> Float {
     var decimalFound:Bool = false
     var characteristicArray:[Character] = []
     
-    for character in string {
+    for character in string.characters {
         if character == "." {
             decimalFound = true
             index = 0
             characteristicArray = characteristicArray.reverse()
             for characteristic in characteristicArray {
-                let number:Float = Float("\(characteristic)".toInt()!)
+                let number:Float = Float("\(characteristic)")!
                 result += number * pow(2, index)
-                index++
+                index += 1
             }
             index = 1
             characteristicArray.removeAll(keepCapacity: false)
@@ -25,15 +25,15 @@ func binaryStringToFloat(string:String) -> Float {
         }
         
         if !decimalFound {
-            characteristicArray += character
+            characteristicArray += [character]
         }
         else
         {
-            let number:Float = Float("\(character)".toInt()!)
+            let number:Float = Float("\(character)")!
             result += number * pow(2, -index)
         }
 
-        index++;
+        index += 1
     }
     return result
 }
@@ -54,7 +54,7 @@ func floatToBinaryString(number:Float) -> String {
             result += "0"
         }
     }
-    result = reverse(result) + "."
+    result = String(result.characters.reverse()) + "."
 
     var newNum:Float = number % 1
     while (newNum > 0)
@@ -73,8 +73,8 @@ func floatToBinaryString(number:Float) -> String {
     
     return result
 }
-let test:String = floatToBinaryString(132.224524563)
+let test:String = floatToBinaryString(132.2245)
 let testResult:Float = binaryStringToFloat(test)
 
-let f:Float = binaryStringToFloat("1101.0110110101")
+let f:Float = binaryStringToFloat("10000100.0011100101111001")
 let s:String = floatToBinaryString(f)

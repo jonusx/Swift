@@ -8,7 +8,7 @@ var solutionList:[String] = [String]()
 
 func logQueens(queens:[Int]) -> String {
     var result:String = "\n"
-    let count:Int = countElements(queens)
+    let count:Int = queens.count
     for index in 0..<count {
         for index1 in 0..<count {
             if queens[index] == index1 {
@@ -25,7 +25,7 @@ func logQueens(queens:[Int]) -> String {
     return result
 }
 
-func canPlaceQueen(#row:Int, #column:Int) -> Bool {
+func canPlaceQueen(row row:Int, column:Int) -> Bool {
     for prevColumn in 0..<column {
         if (queens[prevColumn] == -1) {
             return true
@@ -39,7 +39,7 @@ func canPlaceQueen(#row:Int, #column:Int) -> Bool {
 
 func placeQueen(column:Int) {
     if column == 8 {
-        solutionList += logQueens(queens)
+        solutionList.append(logQueens(queens))
         return
     }
     for row in 0..<8 {
@@ -52,4 +52,4 @@ func placeQueen(column:Int) {
 
 placeQueen(0)
 
-println(solutionList)
+print(solutionList)

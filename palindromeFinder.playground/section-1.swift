@@ -6,19 +6,20 @@ let palindromeStrings:[String] = ["I, madam. I made radio! So I dared! Am I mad?
 
 extension String {
     func characterAtIndex(index:Int) -> Character {
-        return self[advance(self.startIndex, index)]
+        return self[startIndex.advancedBy(index)]
     }
 }
 
 func cleanString(string:String) -> String? {
-    let regex:NSRegularExpression = NSRegularExpression.regularExpressionWithPattern("[^a-zA-Z0-9]", options:.CaseInsensitive, error:nil);
-    return regex.stringByReplacingMatchesInString(string, options: nil, range: NSRange(location: 0, length: countElements(string)), withTemplate: "")
+    let regex:NSRegularExpression = try! NSRegularExpression(pattern:"[^a-zA-Z0-9]", options:.CaseInsensitive)
+    return regex.stringByReplacingMatchesInString(string, options: [], range: NSRange(location: 0, length: string.characters.count), withTemplate: "")
 }
 
 func isPalindrome(string:String) -> Bool {
-    let stringCount = countElements(string)
+    let string = string.lowercaseString
+    let stringCount = string.characters.count
     
-    for var index = 0; index < stringCount/2; index++ {
+    for index in 0 ..< stringCount/2 {
         if string.characterAtIndex(index) != string.characterAtIndex(stringCount - 1 - index) {
             return false;
         }
@@ -35,13 +36,14 @@ func allPalindromes(string:String) -> [String]? {
     
     var stringPlaceholder:String = ""
     var resultArray:[String] = [String]()
-    for var index = 0, stringCount = countElements(cleanedString); index < stringCount; index++ {
+    let stringCount = cleanedString.characters.count
+    for index in 0 ..< stringCount {
         stringPlaceholder = ""
-        stringPlaceholder += cleanedString.characterAtIndex(index)
-        for var subIndex = index+1; subIndex < stringCount; subIndex++ {
-            stringPlaceholder += cleanedString.characterAtIndex(subIndex)
+        stringPlaceholder.append(cleanedString.characterAtIndex(index))
+        for subIndex in index+1 ..< stringCount {
+            stringPlaceholder.append(cleanedString.characterAtIndex(subIndex))
             if isPalindrome(stringPlaceholder) {
-                resultArray += stringPlaceholder
+                resultArray.append(stringPlaceholder)
             }
         }
     }
@@ -49,6 +51,7 @@ func allPalindromes(string:String) -> [String]? {
 }
 
 let results = allPalindromes("Are we not pure? “No sir!” Panama’s moody Noriega brags. “It is garbage!” Irony dooms a man; a prisoner up to new era.")
+
 
 let theCount = results?.count
 

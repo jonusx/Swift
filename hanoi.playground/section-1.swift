@@ -2,7 +2,7 @@
 
 import Cocoa
 
-class Tower {
+class Tower:CustomStringConvertible {
     var disks:[Int] = []
     var index:Int!
     func push(disk:Int) {
@@ -11,7 +11,7 @@ class Tower {
         }
         else
         {
-            disks += disk
+            disks.append(disk)
         }
     }
     func pop() -> Int! {
@@ -24,42 +24,47 @@ class Tower {
     init(index:Int) {
         self.index = index
     }
-    func log() {
+    func log() -> String {
         if disks.isEmpty {
-            println("Tower: \(index)\nEmpty\n")
-            return
+            print("Tower: \(index)\nEmpty\n")
+            return ""
         }
         let max:Int = disks[disks.endIndex - 1] + disks[disks.endIndex - 1] - 1
         var logString:String = "Tower: \(index)\n"
         
         for diskInt in disks {
-            for var index = 0; index < (max-diskInt); index++ {
+            for _ in 0 ..< (max-diskInt) {
                 logString += " "
             }
-            for var index = 0; index < diskInt + diskInt - 1; index++ {
+            for _ in 0 ..< diskInt + diskInt - 1 {
                 logString += "_"
             }
             logString += "\n"
         }
-        println(logString)
+        return logString
+    }
+    
+    var description: String {
+        return log()
     }
 }
 
-func moveTopDiskFrom(#sourceTower:Tower, #destinationTower:Tower) {
+func moveTopDiskFrom(sourceTower sourceTower:Tower, destinationTower:Tower) {
     let topDisk:Int = sourceTower.pop()
     destinationTower.push(topDisk)
 }
 
-func movedDisks(#diskCount:Int, #sourceTower:Tower, #destinationTower:Tower, #tempTower:Tower) {
-    if diskCount > 0 {
-        movedDisks(diskCount: diskCount - 1, sourceTower: sourceTower, destinationTower: tempTower, tempTower: destinationTower)
-        moveTopDiskFrom(sourceTower: sourceTower, destinationTower: destinationTower)
-        movedDisks(diskCount: diskCount - 1, sourceTower: tempTower, destinationTower: destinationTower, tempTower: sourceTower)
+func movedDisks(diskCount diskCount:Int, sourceTower:Tower, destinationTower:Tower, tempTower:Tower) {
+    guard diskCount > 0 else {
+        return
     }
+    movedDisks(diskCount: diskCount - 1, sourceTower: sourceTower, destinationTower: tempTower, tempTower: destinationTower)
+    moveTopDiskFrom(sourceTower: sourceTower, destinationTower: destinationTower)
+    movedDisks(diskCount: diskCount - 1, sourceTower: tempTower, destinationTower: destinationTower, tempTower: sourceTower)
 }
 
 var tower1:Tower = Tower(index: 1)
-for var index = 1; index <= 7; index++ {
+for index in 1...7 {
     tower1.push(index)
 }
 var tower2:Tower = Tower(index: 2)

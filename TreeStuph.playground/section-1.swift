@@ -8,13 +8,13 @@ class MRCNode: NSObject {
     var rightNode:MRCNode?
 }
 
-func createTree(#numbers:[Int], #low:Int, #high:Int) -> MRCNode! {
+func createTree(numbers numbers:[Int], low:Int, high:Int) -> MRCNode! {
     if low > high {
         return nil
     }
     
     let mid:Int = (low + high) / 2;
-    var node:MRCNode = MRCNode()
+    let node:MRCNode = MRCNode()
     
     node.value = numbers[mid];
     node.leftNode = createTree(numbers: numbers, low: low, high: mid - 1)
@@ -23,37 +23,37 @@ func createTree(#numbers:[Int], #low:Int, #high:Int) -> MRCNode! {
 }
 
 func intransverseNode(node:MRCNode!) {
-    if !node {
+    if (node == nil) {
         return
     }
     
     intransverseNode(node.leftNode)
-    println("In Visit \(node.value)")
+    print("In Visit \(node.value)")
     intransverseNode(node.rightNode)
 }
 
 func pretransverseNode(node:MRCNode!) {
-    if !node {
+    if (node == nil) {
         return
     }
     
-    println("Pre Visit \(node.value)")
+    print("Pre Visit \(node.value)")
     pretransverseNode(node.leftNode)
     pretransverseNode(node.rightNode)
 }
 
 func posttransverseNode(node:MRCNode!) {
-    if !node {
+    if (node == nil) {
         return
     }
     
     posttransverseNode(node.leftNode)
     posttransverseNode(node.rightNode)
-    println("Post Visit \(node.value)")
+    print("Post Visit \(node.value)")
 }
 
 func breadthtransverseNode(node:MRCNode!) {
-    if !node {
+    if (node == nil) {
         return
     }
     
@@ -62,15 +62,15 @@ func breadthtransverseNode(node:MRCNode!) {
     
     while !queue.isEmpty {
         transversingNode = queue[queue.endIndex - 1];
-        println("Breadth Visit \(transversingNode!.value)")
+        print("Breadth Visit \(transversingNode!.value)")
         let v = transversingNode!.value
         queue.removeLast()
         
-        if (transversingNode!.leftNode) {
+        if ((transversingNode!.leftNode) != nil) {
             queue.insert(transversingNode!.leftNode!, atIndex: 0)
         }
         
-        if (transversingNode!.rightNode) {
+        if ((transversingNode!.rightNode) != nil) {
             queue.insert(transversingNode!.rightNode!, atIndex: 0)
         }
     }
@@ -81,7 +81,7 @@ func breadthtransverseNode(node:MRCNode!) {
 var array:[Int] = []
 
 for index:Int in 0..<10 {
-    array += index
+    array.append(index)
 }
 
 let node:MRCNode = createTree(numbers: array, low: 0, high: array.count - 1)

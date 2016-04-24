@@ -12,7 +12,7 @@ func divideify(numberA:Int, dividedBy numberB:Int) -> String {
     if remainder != 0 {
         result += "."
     }
-    var lastRemainder:Int = remainder
+    let lastRemainder:Int = remainder
     
     while remainder > 0 {
         let newWhole = remainder * 10

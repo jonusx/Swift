@@ -2,50 +2,36 @@
 
 import Cocoa
 
-func findIntersection(numbers1:[Int], numbers2:[Int]) -> [Int] {
-    var numberDictionary:Dictionary<Int, Int> = Dictionary()
-    var numberIntersections:Dictionary<Int, Int> = Dictionary()
-    var intersections:[Int] = [Int]()
+func findIntersection<T where T:Comparable, T:Hashable>(left:[T], _ right:[T]) -> [T] {
+    var elementDict:[T:T] = [:]
+    var elementIntersections:[T:T] = [:]
+    var intersections:[T] = []
     
-    for number in numbers1 {
-        let existingNumber:Int? = numberDictionary[number]
-        if !existingNumber {
-            numberDictionary[number] = number
-        }
+    for number in left where elementDict[number] == nil {
+        elementDict[number] = number
     }
     
-    for number in numbers2 {
-        let existingNumber:Int? = numberDictionary[number]
-        let intersectingNumber:Int? = numberIntersections[number]
-        if existingNumber &&  !intersectingNumber {
-            intersections += number
-            numberIntersections[number] = number
-        }
+    for number in right where elementDict[number] != nil && elementIntersections[number] == nil{
+        intersections += [number]
+        elementIntersections[number] = number
     }
     return intersections
 }
 
 
-func unionNoDups(numbers1:[Int], numbers2:[Int]) -> Int[] {
-    var numberDictionary:Dictionary<Int, Int> = [:]
-    var unioned:[Int] = [Int]()
+func unionNoDups<T where T:Comparable, T:Hashable>(left:[T], _ right:[T]) -> [T] {
+    var elementDict:[T:T] = [:]
+    var unioned:[T] = []
     
-    for number in numbers1 {
-        let existingNumber:Int? = numberDictionary[number]
-        if !existingNumber {
-            numberDictionary[number] = number
-            unioned += number
-        }
+    for element in left where elementDict[element] == nil {
+        elementDict[element] = element
+        unioned += [element]
     }
     
-    for number in numbers2 {
-        let existingNumber:Int? = numberDictionary[number]
-        if !existingNumber {
-            numberDictionary[number] = numberß
-            unioned += number
-        }
+    for element in right where elementDict[element] == nil {
+        elementDict[element] = element
+        unioned += [element]
     }
-    
     return unioned
 }
 
